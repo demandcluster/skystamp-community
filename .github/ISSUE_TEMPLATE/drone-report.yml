@@ -45,7 +45,7 @@ body:
     id: files
     attributes:
       label: File listing of one flight
-      description: "Paste `ls DJI_XXXX*` (or a screenshot) for a single flight — this captures the SRT, audio sidecar (.M4A/.MKA), .LRF proxies, and naming convention in one go."
+      description: "Paste `ls DJI_XXXX*` (or a screenshot) for a single flight — this captures the SRT, audio sidecar (.M4A), .LRF proxies, and naming convention in one go."
       render: text
     validations:
       required: true
