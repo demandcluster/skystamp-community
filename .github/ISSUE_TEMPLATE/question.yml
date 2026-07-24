@@ -1,0 +1,12 @@
+name: Question
+description: Anything the docs don't answer.
+title: "[Q] "
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Check https://skystamp.net/docs/ first — the answer may already be there.
+    validations:
+      required: true

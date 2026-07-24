@@ -1,0 +1,67 @@
+name: Drone report
+description: Help verify telemetry support for your drone — first confirmed report per model earns a free Personal license.
+title: "[Drone] "
+labels: ["drone-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! A complete report lets us confirm your model quickly.
+        First confirmed report per model earns a free Personal license.
+  - type: input
+    id: model
+    attributes:
+      label: Drone model
+      placeholder: e.g. DJI Mini 5 Pro
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware version
+      placeholder: as shown in the DJI Fly app
+  - type: dropdown
+    id: srt
+    attributes:
+      label: Does your drone produce .SRT caption files?
+      options:
+        - "Yes (Video Captions enabled)"
+        - "No / not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: ffprobe
+    attributes:
+      label: ffprobe output
+      description: "Run: `ffprobe -v quiet -print_format json -show_format -show_streams YOUR_CLIP.MP4` and paste the output."
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: srt-sample
+    attributes:
+      label: SRT sample (if present)
+      description: Paste the first ~10 entries of the .SRT file.
+      render: text
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample clip link
+      description: |
+        Trim a few seconds **without re-encoding** (keeps the embedded telemetry track):
+
+        `ffmpeg -i DJI_XXXX.MP4 -t 5 -map 0 -c copy sample.mp4`
+
+        Upload `sample.mp4` (plus the matching .SRT/.M4A if present) to any
+        file-sharing service (Drive, WeTransfer, …) and paste the link.
+        Editor exports or re-encodes lose the telemetry and can't be used.
+    validations:
+      required: true
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Footage use
+      options:
+        - label: The sample may be used to verify parsing and, trimmed, as a private test fixture
+          required: true
+        - label: Delete my sample entirely after verification instead

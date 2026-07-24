@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://skystamp.net/docs/
+    about: User guide, troubleshooting, FAQ.
+  - name: License & purchase support
+    url: https://skystamp.net/support.html
+    about: Key problems, seats, invoices — email support handles these fastest.
