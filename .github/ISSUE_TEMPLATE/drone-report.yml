@@ -33,7 +33,7 @@ body:
     id: ffprobe
     attributes:
       label: ffprobe output
-      description: "Run: `ffprobe -v quiet -print_format json -show_format -show_streams YOUR_CLIP.MP4` and paste the output."
+      description: "Run: `ffprobe -v quiet -print_format json -show_format -show_streams YOUR_CLIP.MP4` (or `.MOV` — both welcome) and paste the output."
       render: json
     validations:
       required: true
@@ -52,7 +52,11 @@ body:
 
         `ffmpeg -i DJI_XXXX.MP4 -t 5 -map 0 -c copy sample.mp4`
 
-        Upload `sample.mp4` (plus the matching .SRT/.M4A if present) to any
+        (For `.MOV` footage — e.g. Mini 4K — same command with `.mov` in
+        both spots. App support for `.MOV` models is being added; samples
+        drive it.)
+
+        Upload the sample (plus the matching .SRT/.M4A if present) to any
         file-sharing service (Drive, WeTransfer, …) and paste the link.
         Editor exports or re-encodes lose the telemetry and can't be used.
     validations:

@@ -6,9 +6,13 @@ issues live and where drone telemetry support gets built, model by model.
 
 ## Report your drone, earn a license
 
-SkyStamp reads the telemetry DJI embeds in every MP4 — but field layouts
-differ per model, and each one needs verification against real footage.
-That's where you come in:
+SkyStamp reads the telemetry DJI embeds in the video file — but field
+layouts differ per model, and each one needs verification against real
+footage. That's where you come in.
+
+**`.MOV` footage is welcome too** (some models, like the Mini 4K, record
+`.MOV` with telemetry as a subtitle track) — app support for those is being
+added, and samples are exactly what drives it.
 
 **The first three confirmed reports for each drone model earn a Contributor
 license — it never expires and includes lifetime updates.** Independent
@@ -20,7 +24,7 @@ To contribute, open a [drone report](../../issues/new?template=drone-report.yml)
 with:
 
 - Drone model and firmware version
-- `ffprobe` output of an MP4 (the template shows the command)
+- `ffprobe` output of a clip — `.MP4` or `.MOV` (the template shows the command)
 - The `.SRT` file, if your drone recorded one
 - A short sample clip — see the template for a copy command that trims a
   few seconds **without** re-encoding, which preserves the embedded
