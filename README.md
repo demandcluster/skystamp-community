@@ -11,8 +11,8 @@ layouts differ per model, and each one needs verification against real
 footage. That's where you come in.
 
 **`.MOV` footage is welcome too** (some models, like the Mini 4K, record
-`.MOV` with telemetry as a subtitle track) — app support for those is being
-added, and samples are exactly what drives it.
+`.MOV` with telemetry as a subtitle track) — the app supports both formats;
+samples still drive per-model verification.
 
 **The first three confirmed reports for each drone model earn a Contributor
 license — it never expires and includes lifetime updates.** "Confirmed"

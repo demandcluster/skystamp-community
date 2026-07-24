@@ -16,4 +16,4 @@ never expires, lifetime updates**.
 Legend: ✅ verified · ⚠️ partial (see notes) · ❌ not working · — not present
 on this model
 
-File formats: `.MP4` and `.MOV` samples both welcome — `.MOV` app support in progress.
+File formats: `.MP4` and `.MOV` samples both welcome — both fully supported by the app.
