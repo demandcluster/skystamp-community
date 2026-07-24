@@ -33,6 +33,7 @@ Current status per model: [DRONES.md](DRONES.md).
 
 - [Bug report](../../issues/new?template=bug-report.yml)
 - [Question](../../issues/new?template=question.yml)
+- Discord: https://discord.gg/whkyQwMXAc (quick questions, show-and-tell)
 - Docs: https://skystamp.net/docs/
 - Email: support@skystamp.net (license/purchase matters especially)
 
