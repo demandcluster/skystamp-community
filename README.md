@@ -15,10 +15,16 @@ footage. That's where you come in.
 added, and samples are exactly what drives it.
 
 **The first three confirmed reports for each drone model earn a Contributor
-license — it never expires and includes lifetime updates.** Independent
-samples from different pilots are what make a confirmation solid, so
-redundancy is rewarded, not just speed. Substantial help on a tricky model
-(maneuver clips, field verification flights) is rewarded the same way.
+license — it never expires and includes lifetime updates.** "Confirmed"
+means we've verified SkyStamp's telemetry parsing against your sample.
+Independent samples from different pilots are what make a confirmation
+solid, so redundancy is rewarded, not just speed. Substantial help on a
+tricky model (maneuver clips, field verification flights) is rewarded the
+same way.
+
+**Privacy:** issues are public. SRT entries and file metadata may contain
+your takeoff GPS — usually your home. Replace lat/long digits with zeros
+before pasting; we only need the format, not your location.
 
 To contribute, open a [drone report](../../issues/new?template=drone-report.yml)
 with:

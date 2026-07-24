@@ -7,7 +7,14 @@ body:
     attributes:
       value: |
         Thanks for helping! A complete report lets us confirm your model quickly.
-        The first three confirmed reports per model each earn a Contributor license (never expires, lifetime updates).
+        The first three confirmed reports per model each earn a Contributor license
+        (never expires, lifetime updates). "Confirmed" = we've verified SkyStamp's
+        telemetry parsing against your sample.
+
+        **Privacy note before you paste anything:** this issue is public, forever.
+        SRT entries and file metadata may contain your takeoff GPS — usually your
+        home. Feel free to replace lat/long digits with zeros; we only need the
+        format, not your location.
   - type: input
     id: model
     attributes:
@@ -19,21 +26,34 @@ body:
     id: firmware
     attributes:
       label: Firmware version
-      placeholder: as shown in the DJI Fly app
+      description: "10-second lookup — in DJI Fly: Profile → Device Management. Firmware decides telemetry behaviour, so a report can't be placed in the matrix confidently without it."
+      placeholder: e.g. 01.00.0500
+    validations:
+      required: true
   - type: dropdown
     id: srt
     attributes:
-      label: Does your drone produce .SRT caption files?
+      label: With Video Captions/Subtitles turned ON in DJI Fly, does your drone write a .SRT file next to the video?
+      description: Check the setting first, record a short clip, then answer — many drones only write the file once the setting is on.
       options:
-        - "Yes (Video Captions enabled)"
-        - "No / not sure"
+        - "Yes — .SRT appears next to the video"
+        - "No — captions on, but no .SRT written"
+        - "Can't check right now"
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: File listing of one flight
+      description: "Paste `ls DJI_XXXX*` (or a screenshot) for a single flight — this captures the SRT, audio sidecar (.M4A/.MKA), .LRF proxies, and naming convention in one go."
+      render: text
     validations:
       required: true
   - type: textarea
     id: ffprobe
     attributes:
       label: ffprobe output
-      description: "Run: `ffprobe -v quiet -print_format json -show_format -show_streams YOUR_CLIP.MP4` (or `.MOV` — both welcome) and paste the output."
+      description: "Run: `ffprobe -v quiet -print_format json -show_format -show_streams YOUR_CLIP.MP4` (or `.MOV` — both welcome) and paste the output. May contain takeoff GPS in metadata — zero the digits if you prefer, the structure is what matters."
       render: json
     validations:
       required: true
@@ -41,7 +61,7 @@ body:
     id: srt-sample
     attributes:
       label: SRT sample (if present)
-      description: Paste the first ~10 entries of the .SRT file.
+      description: "Paste the first ~10 entries of the .SRT file. These contain your takeoff coordinates — replacing lat/long digits with zeros is fine, we only need the format."
       render: text
   - type: textarea
     id: sample
@@ -53,8 +73,10 @@ body:
         `ffmpeg -i DJI_XXXX.MP4 -t 5 -map 0 -c copy sample.mp4`
 
         (For `.MOV` footage — e.g. Mini 4K — same command with `.mov` in
-        both spots. App support for `.MOV` models is being added; samples
-        drive it.)
+        both spots.)
+
+        Most useful content: a few seconds of **hover, outdoors with GPS
+        lock** — it exercises the trickiest parsing in the shortest clip.
 
         Upload the sample (plus the matching .SRT/.M4A if present) to any
         file-sharing service (Drive, WeTransfer, …) and paste the link.
@@ -66,6 +88,14 @@ body:
     attributes:
       label: Footage use
       options:
-        - label: The sample may be used to verify parsing and, trimmed, as a private test fixture
+        - label: The sample may be used to verify parsing
           required: true
-        - label: Delete my sample entirely after verification instead
+  - type: dropdown
+    id: retention
+    attributes:
+      label: After verification, the sample should be…
+      options:
+        - "kept as a private test fixture (a few trimmed seconds, no audio)"
+        - "deleted entirely"
+    validations:
+      required: true
