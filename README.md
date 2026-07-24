@@ -10,9 +10,11 @@ SkyStamp reads the telemetry DJI embeds in every MP4 — but field layouts
 differ per model, and each one needs verification against real footage.
 That's where you come in:
 
-**The first confirmed report for a drone model earns a free Personal
-license.** Substantial help on a tricky model (maneuver clips, field
-verification flights) is rewarded the same way.
+**The first three confirmed reports for each drone model earn a free
+Personal license** — independent samples from different pilots are what
+make a confirmation solid, so redundancy is rewarded, not just speed.
+Substantial help on a tricky model (maneuver clips, field verification
+flights) is rewarded the same way.
 
 To contribute, open a [drone report](../../issues/new?template=drone-report.yml)
 with:

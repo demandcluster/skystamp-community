@@ -1,5 +1,5 @@
 name: Drone report
-description: Help verify telemetry support for your drone — first confirmed report per model earns a free Personal license.
+description: Help verify telemetry support for your drone — the first three confirmed reports per model each earn a free Personal license.
 title: "[Drone] "
 labels: ["drone-report"]
 body:
@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for helping! A complete report lets us confirm your model quickly.
-        First confirmed report per model earns a free Personal license.
+        The first three confirmed reports per model each earn a free Personal license.
   - type: input
     id: model
     attributes:
