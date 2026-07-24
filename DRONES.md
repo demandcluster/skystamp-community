@@ -10,7 +10,8 @@ real footage, including the embedded (no-SRT) telemetry track.
 Models not listed are untested — SkyStamp may already work (DJI formats are
 similar across the range), but nobody has confirmed it yet.
 **[Report yours](../../issues/new?template=drone-report.yml)** — the first
-three confirmed reports per model each earn a free Personal license.
+three confirmed reports per model each earn a **Contributor license —
+never expires, lifetime updates**.
 
 Legend: ✅ verified · ⚠️ partial (see notes) · ❌ not working · — not present
 on this model
