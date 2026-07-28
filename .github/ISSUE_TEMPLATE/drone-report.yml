@@ -11,6 +11,11 @@ body:
         (never expires, lifetime updates). "Confirmed" = we've verified SkyStamp's
         telemetry parsing against your sample.
 
+        **Most wanted right now:** the **DJI Neo** (the first-generation one — the
+        Neo 2 is a different drone and nothing from the Neo has reached us at all)
+        and the **DJI Osmo Action 4/5/6** (its decoder is written but has never met
+        a real file). Any other model is just as welcome.
+
         **Privacy note before you paste anything:** this issue is public, forever.
         SRT entries and file metadata may contain your takeoff GPS — usually your
         home. Feel free to replace lat/long digits with zeros; we only need the

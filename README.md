@@ -22,6 +22,22 @@ solid, so redundancy is rewarded, not just speed. Substantial help on a
 tricky model (maneuver clips, field verification flights) is rewarded the
 same way.
 
+### Most wanted right now
+
+Any model is welcome, but two would change the code the day they arrive:
+
+- **DJI Neo** (the first-generation one, not the Neo 2) — nothing from this
+  drone has ever reached the project: no clip, not even a caption sample. It
+  is also one of the most likely drones for someone reading this to own, so it
+  is the single biggest hole in the list.
+- **DJI Osmo Action 4 / 5 / 6** — the decoder for these already exists, written
+  from published findings and never once run against a real file. One five-
+  second clip either confirms it or shows us what to fix.
+
+Everything marked *Needs sample* in [DRONES.md](DRONES.md) counts the same. If
+your model is missing from the verified list and you report it, you have earned
+the licence — you are by definition among the first for it.
+
 **Privacy:** issues are public. SRT entries and file metadata may contain
 your takeoff GPS — usually your home. Replace lat/long digits with zeros
 before pasting; we only need the format, not your location.

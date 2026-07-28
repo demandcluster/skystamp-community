@@ -31,6 +31,7 @@ supported", and the table keeps them apart.
 | Model | SRT captions | Embedded telemetry | Status | Notes |
 |---|---|---|---|---|
 | **DJI Neo 2** | ✅ | ✅ incl. attitude & gimbal | **Confirmed** | Reference model; `.M4A` sidecar audio |
+| DJI Neo (first generation) | ❓ untested | ❓ untested | Needs sample | **Not the Neo 2.** No Neo footage or caption sample has reached this project at all — see below |
 | DJI Mini 3 Pro / Mini 4 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Bracket layout; aperture written ×100 (`170` = f/1.7) |
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
@@ -58,6 +59,14 @@ range: the layouts vary more than they look, and the legacy `GPS(...)` models
 were parsing coordinates in the wrong order until a contributed sample
 exposed it.
 
+**The original Neo is listed only to stop the obvious misreading.** Every other
+unknown model is absent from this table; the Neo is here because "DJI Neo 2 ✅"
+sitting one row above is easy to read as covering it, and it does not. They are
+different drones, the embedded telemetry is a different binary schema per
+model, and neither the Neo's captions nor its `djmd` stream has been seen here.
+It may well work on arrival; nobody here knows, and guessing is the one thing
+this table exists to avoid.
+
 ## Known gaps
 
 - **`.OSV` / `.LRF` (Avata 360, 360 models)** — this footage arrives as
@@ -66,15 +75,22 @@ exposed it.
   so the remaining work is container support, plus deciding what an overlay
   should even mean on equirectangular 360 footage. Reports still welcome —
   they tell us whether to prioritise it.
-- **Embedded telemetry on any model but the Neo 2** — the decoder currently
-  assumes the Neo 2 schema. Another model's stream is a different layout, so
-  it needs per-model verification before we'd trust a reading from it.
+- **Embedded telemetry on any model but the Neo 2** — the decoder holds one
+  verified field map (the Neo 2) and one written from published findings but
+  never run against a real file (the Osmo Action 4/5/6). Every other model's
+  stream is a different layout, and the app says so rather than guessing: an
+  unrecognised schema is reported as unrecognised, which is what makes a
+  reported sample worth something.
 
 ## Report your drone
 
 **[Report yours](../../issues/new?template=drone-report.yml)** — the first
 three confirmed reports per model each earn a **Contributor license — never
 expires, lifetime updates**.
+
+**Most wanted:** the **DJI Neo** (first generation), which nothing has been seen
+from at all, and the **DJI Osmo Action 4/5/6**, whose decoder is written but has
+never met a real file. Every other row marked *Needs sample* counts the same.
 
 Most useful, in order:
 
