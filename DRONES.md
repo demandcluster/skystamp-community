@@ -35,12 +35,14 @@ supported", and the table keeps them apart.
 | DJI Mini 3 Pro / Mini 4 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Bracket layout; aperture written ×100 (`170` = f/1.7) |
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
+| DJI Mavic 3E (Enterprise) | ❓ untested | ❓ untested | Needs sample | Enterprise body, and no caption or `djmd` sample has reached this project. Not covered by the Mavic 3 row above |
 | DJI Air 3S | ⚠️ format parsed | ❓ untested | Needs sample | Decimal aperture; HLG colour mode; MP4 does carry `djmd`, schema unverified |
 | DJI Mini 5 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Decimal aperture and focal length |
 | DJI Avata 360 | ⚠️ format parsed, incl. gimbal | ❓ untested | **Blocked** | Ships `.OSV` + `.LRF`, neither ingested yet — see below |
 | DJI Avata 2 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(lat,lon,alt)` + `BAROMETER` |
 | DJI Mavic Pro / Phantom 4 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(...)` layout |
 | DJI Matrice 300 RTK | ⚠️ format parsed | ❓ untested | Needs sample | Legacy layout with `M` unit suffix |
+| DJI Matrice 4TD | ❓ untested | ❓ untested | Needs sample | Nothing seen here — captions or `djmd`. The Matrice 300 row above says nothing about this model |
 | DJI Phantom 4 RTK / P4P | ⚠️ format parsed | ❓ untested | Needs sample | Compact single-line (`F/5.6, SS 400, ISO 100, …`) |
 | DJI Osmo Action 4 / 5 / 6 | — | ⚠️ decoder written, unverified | Needs sample | Not a drone, but embeds GPS from the Bluetooth remote in the same stream |
 
@@ -59,13 +61,14 @@ range: the layouts vary more than they look, and the legacy `GPS(...)` models
 were parsing coordinates in the wrong order until a contributed sample
 exposed it.
 
-**The original Neo is listed only to stop the obvious misreading.** Every other
-unknown model is absent from this table; the Neo is here because "DJI Neo 2 ✅"
-sitting one row above is easy to read as covering it, and it does not. They are
-different drones, the embedded telemetry is a different binary schema per
-model, and neither the Neo's captions nor its `djmd` stream has been seen here.
-It may well work on arrival; nobody here knows, and guessing is the one thing
-this table exists to avoid.
+**Three rows are listed only to stop the obvious misreading** — the original
+Neo, the Mavic 3E and the Matrice 4TD. Every other unknown model is absent from
+this table; these three are here because the row above each one ("DJI Neo 2 ✅",
+"DJI Mavic 3 ⚠️", "DJI Matrice 300 RTK ⚠️") is easy to read as covering them,
+and none of them does. They are different drones, the embedded telemetry is a
+different binary schema per model, and for all three neither the captions nor
+the `djmd` stream has been seen here. They may well work on arrival; nobody here
+knows, and guessing is the one thing this table exists to avoid.
 
 ## Known gaps
 
@@ -88,9 +91,10 @@ this table exists to avoid.
 three confirmed reports per model each earn a **Contributor license — never
 expires, lifetime updates**.
 
-**Most wanted:** the **DJI Neo** (first generation), which nothing has been seen
-from at all, and the **DJI Osmo Action 4/5/6**, whose decoder is written but has
-never met a real file. Every other row marked *Needs sample* counts the same.
+**Most wanted:** the models nothing has been seen from at all — the **DJI Neo**
+(first generation), the **DJI Mavic 3E** and the **DJI Matrice 4TD** — and the
+**DJI Osmo Action 4/5/6**, whose decoder is written but has never met a real
+file. Every other row marked *Needs sample* counts the same.
 
 Most useful, in order:
 
