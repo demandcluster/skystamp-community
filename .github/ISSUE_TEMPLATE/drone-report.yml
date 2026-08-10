@@ -87,10 +87,24 @@ body:
         lock**, and a hover exercises the trickiest parsing. But send it whole.
 
         Upload it (plus the matching .SRT/.M4A if present) to any file-sharing
-        service (Drive, WeTransfer, …) and paste the link. Too large, or you'd
-        rather not post a link publicly? Say so here and we'll arrange a direct
-        transfer. Editor exports and re-encodes lose the telemetry and can't be
-        used.
+        service (Drive, WeTransfer, …) and paste the link.
+
+        **Or send it straight to us with [croc](https://getcroc.com) — no
+        account, no upload limit, no cloud copy.** It's a small open-source
+        tool that moves the file machine-to-machine, end-to-end encrypted:
+
+        - Windows: `winget install schollz.croc`
+        - macOS: `brew install croc`
+        - Linux: `curl https://getcroc.com | bash`
+
+        Then `croc send DJI_XXXX.MP4` (or point it at a whole folder to send
+        the .MP4, .SRT and .M4A together). It prints a short code phrase.
+        **Send that code to us privately — not in this issue** — as anyone who
+        sees it can collect the file first. Say here that you've got a transfer
+        ready and we'll get you an address and be online for it; croc needs
+        both machines running at the same time.
+
+        Editor exports and re-encodes lose the telemetry and can't be used.
     validations:
       required: true
   - type: checkboxes
