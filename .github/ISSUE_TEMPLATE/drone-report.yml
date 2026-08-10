@@ -73,19 +73,24 @@ body:
     attributes:
       label: Sample clip link
       description: |
-        Trim a few seconds **without re-encoding** (keeps the embedded telemetry track):
+        **Please send the file as it came off the drone — don't trim it.**
 
-        `ffmpeg -i DJI_XXXX.MP4 -t 5 -map 0 -c copy sample.mp4`
+        This asked for a trimmed clip until August 2026, and that advice was
+        wrong. On any drone that writes embedded telemetry, `ffmpeg -t 5 -map 0
+        -c copy` either fails outright (`Could not find tag for codec none in
+        stream #1`) or, remuxed to `.MOV`, rewrites the data track's sample
+        description — the bytes travel, the meaning doesn't, and the telemetry
+        no longer decodes. The embedded stream is the part we most need, so a
+        trimmed clip is the one thing that can't do this job.
 
-        (For `.MOV` footage — e.g. Mini 4K — same command with `.mov` in
-        both spots.)
+        A short flight is perfectly fine if you have one — **outdoors with GPS
+        lock**, and a hover exercises the trickiest parsing. But send it whole.
 
-        Most useful content: a few seconds of **hover, outdoors with GPS
-        lock** — it exercises the trickiest parsing in the shortest clip.
-
-        Upload the sample (plus the matching .SRT/.M4A if present) to any
-        file-sharing service (Drive, WeTransfer, …) and paste the link.
-        Editor exports or re-encodes lose the telemetry and can't be used.
+        Upload it (plus the matching .SRT/.M4A if present) to any file-sharing
+        service (Drive, WeTransfer, …) and paste the link. Too large, or you'd
+        rather not post a link publicly? Say so here and we'll arrange a direct
+        transfer. Editor exports and re-encodes lose the telemetry and can't be
+        used.
     validations:
       required: true
   - type: checkboxes
@@ -100,7 +105,7 @@ body:
     attributes:
       label: After verification, the sample should be…
       options:
-        - "kept as a private test fixture (a few trimmed seconds, no audio)"
+        - "kept as a private test fixture (the full file, kept private — never redistributed or published)"
         - "deleted entirely"
     validations:
       required: true
