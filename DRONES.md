@@ -32,7 +32,8 @@ supported", and the table keeps them apart.
 |---|---|---|---|---|
 | **DJI Neo 2** | ✅ | ✅ incl. attitude & gimbal | **Confirmed** | Reference model; `.M4A` sidecar audio |
 | DJI Neo (first generation) | ❓ untested | ❓ untested | Needs sample | **Not the Neo 2.** No Neo footage or caption sample has reached this project at all — see below |
-| DJI Mini 3 Pro / Mini 4 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Bracket layout; aperture written ×100 (`170` = f/1.7) |
+| DJI Mini 4 Pro | ⚠️ parsed, real-firmware captions seen | ❓ untested | Awaiting footage ([report](../../issues/1)) | Firmware `01.0011.00` writes a **decimal** aperture (`[fnum: 1.7]`); other firmware writes it ×100 (`170`). Both are accepted. Carries `djmd` + `dbgi`, one sample per video frame, 1:1 with the captions — schema unverified *here*, though ExifTool 13.59 decodes it |
+| DJI Mini 3 Pro | ⚠️ format parsed | ❓ untested | Needs sample | **Not the Mini 4 Pro** — the row above is a different model and a different `djmd` schema. Bracket layout; aperture ×100 (`170` = f/1.7) on the firmware seen so far |
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
 | DJI Mavic 3E (Enterprise) | ❓ untested | ❓ untested | Needs sample | Enterprise body, and no caption or `djmd` sample has reached this project. Not covered by the Mavic 3 row above |
@@ -98,9 +99,14 @@ file. Every other row marked *Needs sample* counts the same.
 
 Most useful, in order:
 
-1. **A short untrimmed-quality `.MP4`** (a few seconds, copied without
-   re-encoding — the template has the command). This is the only thing that
-   can verify embedded telemetry, and it is where the real gaps are.
+1. **A full original `.MP4`, untrimmed.** This is the only thing that can
+   verify embedded telemetry, and it is where the real gaps are. Please don't
+   cut it down first: on any model carrying `djmd`, a stream-copied trim either
+   fails outright (`Could not find tag for codec none`) or, remuxed to `.MOV`,
+   rewrites the data track's sample description so the bytes survive and the
+   meaning doesn't. A trimmed clip is the one thing that can't do this job.
+   If the file is too large to attach, say so in the report and we'll arrange
+   a transfer.
 2. **The `.SRT`**, if your drone wrote one — quick to check, and it confirms
    the caption layout on real firmware rather than a snippet.
 3. **`ffprobe` output**, which tells us which data streams the file carries
