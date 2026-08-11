@@ -1,5 +1,8 @@
 # SkyStamp community
 
+[![Release build](https://github.com/demandcluster/skystamp/actions/workflows/release.yml/badge.svg)](https://github.com/demandcluster/skystamp/actions/workflows/release.yml)
+
+
 Public home for [SkyStamp](https://skystamp.net) support and drone
 compatibility work. The app itself is closed-source; this repo is where
 issues live and where drone telemetry support gets built, model by model.
