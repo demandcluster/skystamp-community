@@ -37,7 +37,7 @@ supported", and the table keeps them apart.
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
 | DJI Mavic 3E (Enterprise) | ❓ untested | ❓ untested | Needs sample | Enterprise body, and no caption or `djmd` sample has reached this project. Not covered by the Mavic 3 row above |
-| DJI Air 3S | ⚠️ format parsed | ❓ untested | Needs sample | Decimal aperture; HLG colour mode; MP4 does carry `djmd`, schema unverified |
+| **DJI Air 3S** | ⚠️ format parsed | ✅ verified, incl. attitude & gimbal | **Telemetry confirmed, captions unproven** | Embedded schema `dvtm_Air3s.proto` reverse-engineered and flight-verified from a full clip **brianm365** contributed against [#3](../../issues/3), export rendered — shipped in 0.7.2. It mounts its sections one index lower than the Neo 2 and writes coordinates in radians, both of which SkyStamp read wrongly before. Captions were off on that flight, so the `.SRT` side is still only a public sample: decimal aperture, HLG colour mode |
 | DJI Mini 5 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Decimal aperture and focal length |
 | DJI Avata 360 | ⚠️ format parsed, incl. gimbal | ❓ untested | **Blocked** | Ships `.OSV` + `.LRF`, neither ingested yet — see below |
 | DJI Avata 2 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(lat,lon,alt)` + `BAROMETER` |
@@ -79,12 +79,19 @@ knows, and guessing is the one thing this table exists to avoid.
   so the remaining work is container support, plus deciding what an overlay
   should even mean on equirectangular 360 footage. Reports still welcome —
   they tell us whether to prioritise it.
-- **Embedded telemetry on any model but the Neo 2** — the decoder holds one
-  verified field map (the Neo 2) and one written from published findings but
-  never run against a real file (the Osmo Action 4/5/6). Every other model's
-  stream is a different layout, and the app says so rather than guessing: an
-  unrecognised schema is reported as unrecognised, which is what makes a
-  reported sample worth something.
+- **Embedded telemetry on any model but the Neo 2 and the Air 3S** — the
+  decoder holds two flight-verified field maps (those two) and one written from
+  published findings but never run against a real file (the Osmo Action 4/5/6).
+  Every other model's stream is a different layout, and the app says so rather
+  than guessing: an unrecognised schema is reported as unrecognised, which is
+  what makes a reported sample worth something.
+
+  The Air 3S is what that costs and what it buys. One contributed clip moved it
+  from "carries `djmd`, schema unverified" to a full field map in a week — and
+  it took a clip to do it, because the model differed from the Neo 2 in two
+  ways no amount of reading captions would have shown: its sections sit at
+  different indices, and its coordinates are in radians rather than degrees.
+  Guessing either would have put a real flight in the Gulf of Guinea.
 
 ## Report your drone
 
