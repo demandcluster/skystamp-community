@@ -32,7 +32,7 @@ supported", and the table keeps them apart.
 |---|---|---|---|---|
 | **DJI Neo 2** | ✅ | ✅ incl. attitude & gimbal | **Confirmed** | Reference model; `.M4A` sidecar audio |
 | DJI Neo (first generation) | ❓ untested | ❓ untested | Needs sample | **Not the Neo 2.** No Neo footage or caption sample has reached this project at all — see below |
-| **DJI Mini 4 Pro** | ✅ verified on real firmware | ✅ verified, incl. attitude & gimbal | **Confirmed — ships next release** | Two full flights from **Justin (Exphantomflyer)**, lab work by **CallMarcus**, against [#1](../../issues/1). `dvtm_Mini4_Pro.proto` mapped field by field and cross-checked against ExifTool 13.59, export rendered. **0.7.2 and earlier report this model's yaw wrongly** — it names its flight-controller section and puts its gimbal where the Neo 2 keeps its flight controller, which our index fallback misread; see below. Firmware `01.0011.00` writes a **decimal** aperture (`[fnum: 1.7]`); other firmware writes it ×100 (`170`). Both are accepted. Carries `djmd` + `dbgi`, one sample per video frame, 1:1 with the captions |
+| **DJI Mini 4 Pro** | ✅ verified on real firmware | ✅ verified, incl. attitude & gimbal | **Confirmed** | Two full flights from **Justin (Exphantomflyer)**, lab work by **CallMarcus**, against [#1](../../issues/1). `dvtm_Mini4_Pro.proto` mapped field by field and cross-checked against ExifTool 13.59, export rendered — shipped in **0.7.3**. **0.7.2 and earlier report this model's yaw wrongly** — it names its flight-controller section and puts its gimbal where the Neo 2 keeps its flight controller, which our index fallback misread; see below. Firmware `01.0011.00` writes a **decimal** aperture (`[fnum: 1.7]`); other firmware writes it ×100 (`170`). Both are accepted. Carries `djmd` + `dbgi`, one sample per video frame, 1:1 with the captions |
 | DJI Mini 3 Pro | ⚠️ format parsed | ❓ untested | Needs sample | **Not the Mini 4 Pro** — the row above is a different model and a different `djmd` schema. Bracket layout; aperture ×100 (`170` = f/1.7) on the firmware seen so far |
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
@@ -103,10 +103,11 @@ knows, and guessing is the one thing this table exists to avoid.
   SkyStamp showed 61.5° on the same frame — and the real gimbal group was never
   read at all.
 
-  Fixed. A section that states its type is now taken at its word wherever it
-  sits, and only an anonymous section is read by its slot. **Every release up
-  to and including 0.7.2 has the yaw fault**; the fix is on `trunk` with an
-  export rendered from these clips, and ships next.
+  Fixed in **0.7.3**. A section that states its type is now taken at its word
+  wherever it sits, and only an anonymous section is read by its slot — so the
+  next model to rearrange itself cannot reproduce this. **Every release up to
+  and including 0.7.2 has the yaw fault**, and a clip exported with one of them
+  is stamped with it; re-export from 0.7.3 to correct it.
 
   The verification is the strongest this list has, because for the first time
   there was an outside reference to check against rather than our own bytes:
