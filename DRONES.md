@@ -32,7 +32,7 @@ supported", and the table keeps them apart.
 |---|---|---|---|---|
 | **DJI Neo 2** | ✅ | ✅ incl. attitude & gimbal | **Confirmed** | Reference model; `.M4A` sidecar audio |
 | DJI Neo (first generation) | ❓ untested | ❓ untested | Needs sample | **Not the Neo 2.** No Neo footage or caption sample has reached this project at all — see below |
-| DJI Mini 4 Pro | ⚠️ parsed, real-firmware captions seen | ❓ untested | Awaiting footage ([report](../../issues/1)) | Firmware `01.0011.00` writes a **decimal** aperture (`[fnum: 1.7]`); other firmware writes it ×100 (`170`). Both are accepted. Carries `djmd` + `dbgi`, one sample per video frame, 1:1 with the captions — schema unverified *here*, though ExifTool 13.59 decodes it |
+| **DJI Mini 4 Pro** | ✅ verified on real firmware | ⚠️ schema mapped, decoder fixes pending | **Footage received, not yet confirmed** | Two full flights from **Justin (Exphantomflyer)**, lab work by **CallMarcus**, against [#1](../../issues/1). `dvtm_Mini4_Pro.proto` is now mapped field by field and cross-checked against ExifTool 13.59. It is **not** shipped: the decoder currently misreads it in ways the table would be wrong to hide — see below. Firmware `01.0011.00` writes a **decimal** aperture (`[fnum: 1.7]`); other firmware writes it ×100 (`170`). Both are accepted. Carries `djmd` + `dbgi`, one sample per video frame, 1:1 with the captions |
 | DJI Mini 3 Pro | ⚠️ format parsed | ❓ untested | Needs sample | **Not the Mini 4 Pro** — the row above is a different model and a different `djmd` schema. Bracket layout; aperture ×100 (`170` = f/1.7) on the firmware seen so far |
 | DJI Mavic Air 2 / DJI FPV | ⚠️ format parsed | ❓ untested | Needs sample | Same bracket layout as above |
 | DJI Mavic 3 / Air 2S / Air 3 | ⚠️ format parsed | ❓ untested | Needs sample | `SrtCnt` counter; aperture ×100, focal length ×10 |
@@ -92,6 +92,34 @@ knows, and guessing is the one thing this table exists to avoid.
   ways no amount of reading captions would have shown: its sections sit at
   different indices, and its coordinates are in radians rather than degrees.
   Guessing either would have put a real flight in the Gulf of Guinea.
+- **DJI Mini 4 Pro — mapped, misdecoded, being fixed.** The two contributed
+  flights settled the schema, and the honest result is that SkyStamp reads it
+  wrongly today. The model announces its flight-controller section with an
+  explicit type tag, and puts its gimbal in the slot where the Neo 2 keeps its
+  flight controller. SkyStamp's fallback keys off the slot number, so it takes
+  the gimbal for a second flight controller. Three consequences:
+
+  - **Drone yaw is actually the gimbal's yaw** — a steady ~13° error. ExifTool
+    reads 48.3° where SkyStamp shows 61.5° on the same frame.
+  - **The gimbal widgets get nothing** and the app reports the gimbal as
+    unknown, on a file that carries gimbal pitch, roll and yaw plus a full
+    orientation quaternion.
+  - **Relative altitude is never read** from the embedded stream, so a
+    captions-off clip from this model would stamp an altitude of zero.
+
+  Everything else checks out against ExifTool 13.59 sample-for-sample:
+  position, absolute altitude, velocity, roll and pitch. Vertical speed was
+  flight-checked independently against the altitude trace (correlation 0.978,
+  mean error 0.17 m/s). One correction to the reference, in the other
+  direction: ExifTool's `DroneRoll` and `DronePitch` are **swapped** on this
+  model. Flight physics settles it — the field ExifTool calls roll shows no
+  relationship to bank angle, while the other tracks it at 0.75 across 2260
+  samples in a turn-heavy flight. SkyStamp already treats that pair the
+  opposite way round from ExifTool's table, from a deliberate maneuver clip
+  flown on the Neo 2, and the Mini 4 Pro independently agrees.
+
+  The row moves to **Confirmed** when the dispatch fix lands, an export
+  renders, and it ships — the same bar the Air 3S had to clear.
 
 ## Report your drone
 
