@@ -97,18 +97,16 @@ knows, and guessing is the one thing this table exists to avoid.
   wrongly today. The model announces its flight-controller section with an
   explicit type tag, and puts its gimbal in the slot where the Neo 2 keeps its
   flight controller. SkyStamp's fallback keys off the slot number, so it takes
-  the gimbal for a second flight controller. Three consequences:
+  the gimbal for a second flight controller. Two consequences:
 
   - **Drone yaw is actually the gimbal's yaw** — a steady ~13° error. ExifTool
     reads 48.3° where SkyStamp shows 61.5° on the same frame.
   - **The gimbal widgets get nothing** and the app reports the gimbal as
     unknown, on a file that carries gimbal pitch, roll and yaw plus a full
     orientation quaternion.
-  - **Relative altitude is never read** from the embedded stream, so a
-    captions-off clip from this model would stamp an altitude of zero.
 
   Everything else checks out against ExifTool 13.59 sample-for-sample:
-  position, absolute altitude, velocity, roll and pitch. Vertical speed was
+  position, both altitudes, velocity, roll and pitch. Vertical speed was
   flight-checked independently against the altitude trace (correlation 0.978,
   mean error 0.17 m/s). One correction to the reference, in the other
   direction: ExifTool's `DroneRoll` and `DronePitch` are **swapped** on this
