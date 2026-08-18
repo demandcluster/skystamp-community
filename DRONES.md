@@ -14,7 +14,7 @@ SkyStamp reads a clip two ways, and the distinction decides what we can
 promise without your footage:
 
 - **`.SRT` captions** — text, written only when Video Captions was enabled.
-  There are about six known layouts across the DJI range and we now parse
+  There are about seven known layouts across the DJI range and we now parse
   all of them, so a new model's captions usually work on arrival.
 - **Embedded telemetry** — DJI's `djmd` data stream inside the MP4, present
   whether or not captions were on, and richer (attitude, gimbal). This one
@@ -41,7 +41,10 @@ supported", and the table keeps them apart.
 | DJI Mini 5 Pro | ⚠️ format parsed | ❓ untested | Needs sample | Decimal aperture and focal length |
 | DJI Avata 360 | ⚠️ format parsed, incl. gimbal | ❓ untested | **Blocked** | Ships `.OSV` + `.LRF`, neither ingested yet — see below |
 | DJI Avata 2 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(lat,lon,alt)` + `BAROMETER` |
-| DJI Mavic Pro / Phantom 4 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(...)` layout |
+| **DJI Mavic Pro** | ✅ verified on real firmware | — none in the footage seen | **Confirmed** (captions are all this footage carries) | Full flight, export rendered — shipped in **0.7.6**. The caption layout follows the **app**, not the drone: paired with the DJI GO era app it leads with `HOME(...)` and reverses the tuple to `GPS(longitude, latitude, satellites)`. **0.7.5 and earlier read those coordinates mirrored** — a UK flight lands in the Indian Ocean, and silently, because both values sit inside latitude range so no range check can catch it — **and stamp the satellite count as altitude**; the real altitude is `BAROMETER:`. Re-export from 0.7.6 to correct either. The clip seen here carries a single video stream: no `djmd`, no audio track |
+| **DJI Phantom 3 Pro / Advanced** | ✅ verified on real firmware | — pre-`djmd` generation | **Confirmed** (captions are everything this generation writes) | One full flight from each model, exports rendered — shipped in **0.7.6**. Same DJI GO caption layout as the Mavic Pro row, same 0.7.5-and-earlier mirrored-coordinates / satellites-as-meters fault, same fix. The two models are indistinguishable in their captions (same fixed f/2.8 lens, same app version string) |
+| **DJI Phantom 3 Standard** | ✅ verified on real firmware | — pre-`djmd` generation | **Confirmed** (captions are everything this generation writes) | Full flight, export rendered — shipped in **0.7.6**. Same layout with minor spellings of its own: `Fnum:2.8` without the `F` prefix, `EV: 0` with a space |
+| DJI Phantom 4 | ⚠️ format parsed | ❓ untested | Needs sample | Legacy `GPS(...)` layout. Split from the old "Mavic Pro / Phantom 4" row — the Mavic Pro footage above says nothing about this model, and the Mavic Pro turned out to write a different tuple order than the Phantom 4 sample this row's parser was built from |
 | DJI Matrice 300 RTK | ⚠️ format parsed | ❓ untested | Needs sample | Legacy layout with `M` unit suffix |
 | DJI Matrice 4TD | ❓ untested | ❓ untested | Needs sample | Nothing seen here — captions or `djmd`. The Matrice 300 row above says nothing about this model |
 | DJI Phantom 4 RTK / P4P | ⚠️ format parsed | ❓ untested | Needs sample | Compact single-line (`F/5.6, SS 400, ISO 100, …`) |
